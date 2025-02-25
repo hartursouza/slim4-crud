@@ -1,0 +1,19 @@
+{
+    "name": "hartursouza/slim4",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hartur Souza",
+            "email": "hartursouza3@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/psr7": "^1.7",
+        "slim/slim": "^4.14",
+        "league/plates": "^3.6"
+    }
+}
