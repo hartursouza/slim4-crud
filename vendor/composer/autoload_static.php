@@ -10,6 +10,7 @@ class ComposerStaticInitce17c9fb600845701490f05ceeb5dccc
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        'a87e5f90dd8bbf7244669aa35a5ae798' => __DIR__ . '/../..' . '/app/helpers/config.php',
     );
 
     public static $prefixLengthsPsr4 = array (
