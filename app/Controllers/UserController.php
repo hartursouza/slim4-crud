@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index(Request $request, Response $response, array $args = []): Response
     {
         $users = $this->user->findAll();
-        $view = $this->getTemplate('users');
+        $view = $this->getTemplate('users', ['users' => $users]);
         $response->getBody()->write($view);
         
         return $response;
