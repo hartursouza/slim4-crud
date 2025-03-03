@@ -18,8 +18,9 @@ class UserController extends Controller
 
     public function index(Request $request, Response $response, array $args = []): Response
     {
-        $this->user->update(['name' => 'Hartur', 'email' => 'hartur.souza@email.com'], ['id' => 1]);
-        // $users = $this->user->findBy('email', 'joao.silva@email.com');
+        $updated = $this->user->update(['name' => 'Hartur', 'email' => 'hartur.souza@email.com'], ['id' => 1]);
+        var_dump($updated);
+
         $users = $this->user->findAll();
         $view = $this->getTemplate('users', ['users' => $users]);
         $response->getBody()->write($view);

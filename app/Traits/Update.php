@@ -9,33 +9,29 @@ trait Update
     private string $columnsAndValues = '';
     private string $conditionString = '';
 
-    public function update(array $createFieldsAndValues, array $condition)
+    public function update(array $updatedFieldsAndValues, array $condition)
     {
-        try {
-            if (count($createFieldsAndValues) > 0) {
-                foreach($createFieldsAndValues as $field => $value) {
-                    if (is_string($value)) {
-                        $value = "'{$value}'";
-                    }
-                    $this->columnsAndValues .= "{$field} = {$value}, ";
-                }
-            }
+        foreach(array_keys($updatedFieldsAndValues) as $field) {
+            $this->columnsAndValues .= "{$field} = :{$field}, ";
+        }
 
-            foreach ($condition as $field => $value) {
-                $this->conditionString .= "{$field} = {$value}";
-            }
+        foreach (array_keys($condition) as $field) {
+            $this->conditionString .= "{$field} = :{$field}";
+        }
             
-            $this->columnsAndValues = removeLastCharacter($this->columnsAndValues);
+        $this->columnsAndValues = removeLastCharacter($this->columnsAndValues);
 
-            $sql = sprintf('UPDATE %s SET %s WHERE %s',
+        $sql = sprintf('UPDATE %s SET %s WHERE %s',
             $this->table,
             $this->columnsAndValues,
             $this->conditionString
-             );
-        
-        $stmt = $this->connection->prepare($sql);
-        return $stmt->execute();
+        );
 
+        $bind = array_merge($updatedFieldsAndValues, $condition);
+        
+        try {
+            $stmt = $this->connection->prepare($sql);
+            return $stmt->execute($bind);
         } catch (PDOException $e) {
             var_dump($e->getMessage());
         }
