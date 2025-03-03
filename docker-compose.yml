@@ -1,12 +1,16 @@
+version: "3.8"
+
 services:
   mysql:
     image: "mysql:8.0"
+    container_name: slim4-mysql-1
     working_dir: /application
     volumes:
       - ".:/application"
+      - mysql_data:/var/lib/mysql # Persistência dos dados do MySQL
     environment:
       - MYSQL_ROOT_PASSWORD=011964
-      - MYSQL_DATABASE=mysql
+      - MYSQL_DATABASE=slim4 # Agora o banco slim4 será criado automaticamente
       - MYSQL_USER=slim
       - MYSQL_PASSWORD=password
     ports:
@@ -28,3 +32,6 @@ services:
       - ".:/application"
       - "./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.4/fpm/conf.d/99-overrides.ini"
       - "./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.4/cli/conf.d/99-overrides.ini"
+
+volumes:
+  mysql_data: # Declaração do volume fora dos serviços

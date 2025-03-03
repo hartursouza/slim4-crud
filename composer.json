@@ -5,7 +5,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/helpers/config.php"
+            "app/helpers/config.php",
+            "app/helpers/removeLastCharacter.php"
         ]
     },
     "authors": [

@@ -15,7 +15,7 @@ class HomeController extends Controller
 
     public function index(Request $request, Response $response, array $args = []): Response
     { 
-        $view = $this->getTemplate('home');
+        $view = $this->getTemplate('home', []);
         $response->getBody()->write($view);
         
         return $response;

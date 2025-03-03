@@ -13,7 +13,7 @@ abstract class Controller {
         $this->templates = new Engine($path);
     }
 
-    public function getTemplate(string $template, array $args = [])
+    public function getTemplate(string $template, array $args)
     {
         return $this->templates->render($template, $args);
     }

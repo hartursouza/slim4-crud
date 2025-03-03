@@ -10,4 +10,5 @@ return array(
     '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'a87e5f90dd8bbf7244669aa35a5ae798' => $baseDir . '/app/helpers/config.php',
+    '2621a843f39e76f87a92e96c3af16f43' => $baseDir . '/app/helpers/removeLastCharacter.php',
 );
