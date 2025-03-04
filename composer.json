@@ -6,7 +6,8 @@
         },
         "files": [
             "app/helpers/config.php",
-            "app/helpers/removeLastCharacter.php"
+            "app/helpers/removeLastCharacter.php",
+            "app/helpers/redirect.php"
         ]
     },
     "authors": [

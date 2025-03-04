@@ -17,17 +17,57 @@ class UserController extends Controller
         parent::__construct('users');
     }
 
-    public function index(Request $request, Response $response, array $args = []): Response
-    {
+    public function index(Request $request, Response $response): Response
+    {   
+        $flash = Flash::get('message');
         $users = $this->user->findAll();
-        $view = $this->getTemplate('users', ['users' => $users]);
+        $view = $this->getTemplate('users', ['users' => $users, 'message' => $flash]);
         $response->getBody()->write($view);
         
         return $response;
     }
     
-    public function create()
+    public function create(Request $request, Response $response)
     {
+        $view = $this->getTemplate('create', []);
+        $response->getBody()->write($view);
 
+        return $response;
+    }
+
+    public function store(Request $request, Response $response)
+    {
+        var_dump('store');
+        return $response;  
+        // Flash::set('message', 'teste');
+        //return redirect($response, '/users');
+    }
+
+    public function updateForm(Request $request, Response $response)
+    {
+        $view = $this->getTemplate('update', []);
+        $response->getBody()->write($view);
+
+        return $response;
+    }
+
+    public function update(Request $request, Response $response)
+    {
+        var_dump('update');
+        return $response;  
+    }
+
+    public function delete(Request $request, Response $response)
+    {
+        $view = $this->getTemplate('delete', []);
+        $response->getBody()->write($view);
+
+        return $response;
+    }
+
+    public function destroy(Request $request, Response $response)
+    {
+        var_dump('delete');
+        return $response;  
     }
 }
