@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Classes\Flash;
 use App\Database\Models\User;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -18,13 +19,15 @@ class UserController extends Controller
 
     public function index(Request $request, Response $response, array $args = []): Response
     {
-        $updated = $this->user->update(['name' => 'Hartur', 'email' => 'hartur.souza@email.com'], ['id' => 1]);
-        var_dump($updated);
-
         $users = $this->user->findAll();
         $view = $this->getTemplate('users', ['users' => $users]);
         $response->getBody()->write($view);
         
         return $response;
+    }
+    
+    public function create()
+    {
+
     }
 }
