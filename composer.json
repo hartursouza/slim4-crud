@@ -1,24 +1,24 @@
 {
-    "name": "hartursouza/slim4",
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        },
-        "files": [
-            "app/helpers/config.php",
-            "app/helpers/removeLastCharacter.php",
-            "app/helpers/redirect.php"
-        ]
+  "name": "hartursouza/slim4",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
     },
-    "authors": [
-        {
-            "name": "Hartur Souza",
-            "email": "hartursouza3@gmail.com"
-        }
-    ],
-    "require": {
-        "slim/psr7": "^1.7",
-        "slim/slim": "^4.14",
-        "league/plates": "^3.6"
+    "files": [
+      "app/helpers/config.php",
+      "app/helpers/removeLastCharacter.php",
+      "app/helpers/redirect.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Hartur Souza",
+      "email": "hartursouza3@gmail.com"
     }
+  ],
+  "require": {
+    "slim/psr7": "^1.7",
+    "slim/slim": "^4.14",
+    "league/plates": "^3.6"
+  }
 }

@@ -1,8 +1,6 @@
 <?php 
 
-namespace App\Helpers;
-
-function redirect($response, $to, $httpStatus = 200)
+function redirect($response, $toPage, $httpStatus = 200)
 {
-    return $response->withHeader('location', $to)->withStatus($httpStatus);
+    return $response->withHeader('location', $toPage)->withStatus($httpStatus);
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Classes\Flash;
+use App\Classes\Validate;
 use App\Database\Models\User;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -10,26 +11,30 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class UserController extends Controller
 {
     private $user;
+    private $validate;
 
     public function __construct()
     {   
-        $this->user = new User; 
+        $this->user = new User;
+        $this->validate = new Validate;
         parent::__construct('users');
     }
 
     public function index(Request $request, Response $response): Response
     {   
-        $flash = Flash::get('message');
         $users = $this->user->findAll();
-        $view = $this->getTemplate('users', ['users' => $users, 'message' => $flash]);
-        $response->getBody()->write($view);
+
+        $view = $this->getTemplate('users', ['users' => $users]);
+        $response->withStatus(200)->getBody()->write($view);
         
         return $response;
     }
     
     public function create(Request $request, Response $response)
     {
-        $view = $this->getTemplate('create', []);
+        $messages = Flash::getAll();
+
+        $view = $this->getTemplate('create', ['messages' => $messages]);
         $response->getBody()->write($view);
 
         return $response;
@@ -37,10 +42,27 @@ class UserController extends Controller
 
     public function store(Request $request, Response $response)
     {
-        var_dump('store');
+        $name = strip_tags($_POST['name']);
+        $email = strip_tags($_POST['email']);
+        $password = strip_tags($_POST['password']);
+    
+        $this->validate->required(['name', 'email', 'password'])->exist($this->user, 'email', $email);
+        $erros = $this->validate->getErros();
+
+        if($erros)
+        {
+            Flash::flashes($erros);
+            return redirect($response, '/users/create');
+        }
+
+        $created = $this->user->create(['name' => $name, 'email' => $email, 'password' => password_hash($email, PASSWORD_DEFAULT)]);
+
+        if($created)
+        {
+            return redirect($response, '/users');
+        }
+
         return $response;  
-        // Flash::set('message', 'teste');
-        //return redirect($response, '/users');
     }
 
     public function updateForm(Request $request, Response $response)

@@ -12,7 +12,7 @@ trait Create
             $sql = sprintf('INSERT INTO %s (%s) VALUES(%s)',
             $this->table,
             implode(',', array_keys($createFieldsAndValues)),
-            ':'.implode(',', array_keys($createFieldsAndValues))
+            ':'.implode(', :', array_keys($createFieldsAndValues))
             );
 
             $stmt = $this->connection->prepare($sql);
