@@ -23,9 +23,10 @@ class UserController extends Controller
     public function index(Request $request, Response $response): Response
     {   
         $users = $this->user->findAll();
+        $messages = Flash::getAll();
 
-        $view = $this->getTemplate('users', ['users' => $users]);
-        $response->withStatus(200)->getBody()->write($view);
+        $view = $this->getTemplate('users', ['users' => $users, 'messages' => $messages]);
+        $response->getBody()->write($view);
         
         return $response;
     }
@@ -65,9 +66,15 @@ class UserController extends Controller
         return $response;  
     }
 
-    public function updateForm(Request $request, Response $response, array $args)
+    public function edit(Request $request, Response $response, array $args)
     {
-        $user = $this->user->findBy('id', $args['id']);
+        $user = $this->user->findBy('id', strip_tags($args['id']));
+
+        if(!$user)
+        {
+            Flash::set('message', 'Usuário não existe', 'danger');
+            return redirect($response, '/users');
+        }
 
         $view = $this->getTemplate('update', ['user' => $user]);
         $response->getBody()->write($view);
@@ -77,16 +84,17 @@ class UserController extends Controller
 
     public function update(Request $request, Response $response, array $args)
     {   
-        $user = $this->user->findBy('id', $args['id']);
+        $id = $_POST['id'];
+
+        $user = $this->user->findBy('id', $id);
 
         $name = !empty($_POST['name']) ? strip_tags($_POST['name']) : $user->name;
         $email = !empty($_POST['email']) ? strip_tags($_POST['email']) : $user->email;
         $password = !empty($_POST['password']) ? strip_tags($_POST['password']) : $user->password;
-
-
+       
         $updated = $this->user->update(
             ['name' => $name, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)],
-            ['id' => $args['id']]);
+            ['id' => $id]);
 
         if($updated)
         {
@@ -96,17 +104,27 @@ class UserController extends Controller
         return $response;  
     }
 
-    public function delete(Request $request, Response $response)
+    public function destroy(Request $request, Response $response, array $args)
     {
-        $view = $this->getTemplate('delete', []);
-        $response->getBody()->write($view);
+        $id = strip_tags($args['id']);
 
-        return $response;
-    }
+        $user = $this->user->findBy('id', $id);
 
-    public function destroy(Request $request, Response $response)
-    {
-        var_dump('delete');
-        return $response;  
+        if(!$user)
+        {
+            Flash::set('message', 'Usuário não existe', 'danger');
+            return redirect($response, '/users');
+        }
+
+        $deleted = $this->user->delete('id', $id);
+
+        if($deleted)
+        {   
+            Flash::set('message', 'Deletado com sucesso');
+            return redirect($response, '/users');
+        }
+
+        Flash::set('message', 'Ocorreu um erro ao deletar', 'danger');
+        return redirect($response, '/users');
     }
 }
