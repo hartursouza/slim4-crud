@@ -55,7 +55,7 @@ class UserController extends Controller
             return redirect($response, '/users/create');
         }
 
-        $created = $this->user->create(['name' => $name, 'email' => $email, 'password' => password_hash($email, PASSWORD_DEFAULT)]);
+        $created = $this->user->create(['name' => $name, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)]);
 
         if($created)
         {
@@ -65,17 +65,34 @@ class UserController extends Controller
         return $response;  
     }
 
-    public function updateForm(Request $request, Response $response)
+    public function updateForm(Request $request, Response $response, array $args)
     {
-        $view = $this->getTemplate('update', []);
+        $user = $this->user->findBy('id', $args['id']);
+
+        $view = $this->getTemplate('update', ['user' => $user]);
         $response->getBody()->write($view);
 
         return $response;
     }
 
-    public function update(Request $request, Response $response)
-    {
-        var_dump('update');
+    public function update(Request $request, Response $response, array $args)
+    {   
+        $user = $this->user->findBy('id', $args['id']);
+
+        $name = !empty($_POST['name']) ? strip_tags($_POST['name']) : $user->name;
+        $email = !empty($_POST['email']) ? strip_tags($_POST['email']) : $user->email;
+        $password = !empty($_POST['password']) ? strip_tags($_POST['password']) : $user->password;
+
+
+        $updated = $this->user->update(
+            ['name' => $name, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)],
+            ['id' => $args['id']]);
+
+        if($updated)
+        {
+            return redirect($response, '/users');
+        }
+        
         return $response;  
     }
 

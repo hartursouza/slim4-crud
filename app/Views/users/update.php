@@ -2,7 +2,7 @@
 
 <h1>Update User</h1>
 
-<form action="/users/update" method="post" class="m-3">
+<form action="/users/update/<?=$user->id?>" method="post" class="m-3">
     <input type="hidden" name="_METHOD" value="PUT"/>
     <div class="form-group col-sm-5">
         <label for="name">Nome</label>
@@ -16,5 +16,5 @@
         <label for="password">Senha</label>
         <input type="password" name="password" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Atualizar</button>
+    <button type="submit" class="btn btn-primary my-3">Atualizar</button>
 </form>

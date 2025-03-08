@@ -8,7 +8,7 @@
     <?php foreach ($users as $user): ?>
         <li>
             <?= $user->name ?> - <?= $user->email ?>
-            <a href="/users/update" class="btn btn-primary py-0">Editar</a>
+            <a href="/users/update/<?=$user->id?>" class="btn btn-primary py-0">Editar</a>
         </li>
     <?php endforeach ?>
 </ul>
