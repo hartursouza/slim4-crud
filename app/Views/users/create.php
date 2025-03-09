@@ -2,7 +2,7 @@
 
 <h1>Create User</h1>
 
-<form action="/users/store" method="post" class="m-3">
+<form action="/users/store" method="post">
     <div class="form-group col-sm-5">
         <label for="name">Nome</label>
         <input type="text" name="name" class="form-control">

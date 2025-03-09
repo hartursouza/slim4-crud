@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- BOOSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- CSS -->
-    <link rel="stylesheet" href="/assets/home/css/style.css">
-    <!-- TITLE -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página estruturada com Bootstrap 5">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/users/css/style.css">
+
+    <!-- Title -->
     <title><?=$this->e($title)?></title>
-  </head>
-  <body>
-    <div class="container">
-      <?= $this->insert('partials/header') ?>
+</head>
+<body class="d-flex flex-column min-vh-100">
 
-      <?= $this->section('content') ?>
+    <!-- Header -->
+    <?= $this->insert('partials/header') ?>
 
-      <?= $this->insert('partials/footer') ?>
-    </div>
-  </body>
+    <!-- Conteúdo principal -->
+    <main class="container flex-grow-1 mt-4">
+        <?= $this->section('content') ?>
+    </main>
+
+    <!-- Footer -->
+    <?= $this->insert('partials/footer') ?>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
