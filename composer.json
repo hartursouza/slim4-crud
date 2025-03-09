@@ -19,6 +19,7 @@
   "require": {
     "slim/psr7": "^1.7",
     "slim/slim": "^4.14",
-    "league/plates": "^3.6"
+    "league/plates": "^3.6",
+    "twbs/bootstrap-icons": "^1.11"
   }
 }

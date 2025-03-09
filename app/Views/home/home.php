@@ -1,7 +1,5 @@
 <?php $this->layout('layouts/master', ['title' => 'Home']) ?>
 
-<h1>Home</h1>
-
-<p>Página inicial</p>
+<h1>Página Inicial</h1>
 
 
