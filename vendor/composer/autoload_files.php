@@ -11,5 +11,6 @@ return array(
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'a87e5f90dd8bbf7244669aa35a5ae798' => $baseDir . '/app/helpers/config.php',
     '2621a843f39e76f87a92e96c3af16f43' => $baseDir . '/app/helpers/removeLastCharacter.php',
+    '7ad66d9f7e9c1ab7fe69090c606fa910' => $baseDir . '/app/helpers/showMessageError.php',
     '3fb54d8e18ba173769bd6252339ee067' => $baseDir . '/app/helpers/redirect.php',
 );

@@ -1,9 +1,12 @@
 <?php
 
+use App\Controllers\LoginController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
 
 $app->get('/', [HomeController::class, 'index']);
+$app->get('/login', [LoginController::class, 'index']);
+$app->post('/login', [LoginController::class, 'store']);
 
 $app->group('/users', function ($group) {
     $group->get('', [UserController::class, 'index']);
