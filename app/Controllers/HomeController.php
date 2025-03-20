@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Database\Models\User;
-use League\Plates\Engine;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -14,8 +12,15 @@ class HomeController extends Controller
     }
 
     public function index(Request $request, Response $response, array $args = []): Response
-    { 
-        $view = $this->getTemplate('home', []);
+    {   
+        if(!$_SESSION['is_logged_in']) {
+            return redirect($response, '/login');
+        }
+
+        $name = $_SESSION['user_logged_data']['name'] ?? '';
+        $email = $_SESSION['user_logged_data']['email'] ?? '';
+
+        $view = $this->getTemplate('home', ['name' => $name]);
         $response->getBody()->write($view);
         
         return $response;

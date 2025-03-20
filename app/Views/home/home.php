@@ -1,5 +1,5 @@
 <?php $this->layout('layouts/master', ['title' => 'Home']) ?>
 
-<h1>Página Inicial</h1>
+<h1>Bem-vindo, <?= $this->e($name) ?>.</h1>
 
 

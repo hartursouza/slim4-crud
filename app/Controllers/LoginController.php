@@ -3,20 +3,20 @@
 namespace App\Controllers;
 
 use App\Classes\Flash;
+use App\Classes\Login;
 use App\Classes\Validate;
 use App\Controllers\Controller;
-use App\Database\Models\User;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class LoginController extends Controller {
 
     private $validate;
-    private $user;
+    private $login;
 
     public function __construct() {
-        $this->user = new User;
         $this->validate = new Validate;
+        $this->login = new Login;
         parent::__construct('login');
     }
 
@@ -44,13 +44,19 @@ class LoginController extends Controller {
             return redirect($response, '/login');
         }
 
-      /*   $user = $this->user->findBy('email', $email);
+        $logged = $this->login->login($email, $password);
 
-        if ($user && password_verify($password, $user->password)) {
-            redirect($response, '/');
-        } */
+        if ($logged) {
+            return redirect($response, '/');
+        }
 
-        return $response;
+        Flash::set('message', 'Ocorreu um erro ao logar', 'danger');
+        return redirect($response, '/login');
     }
 
+    public function loggout(Request $request, Response $response)
+    {
+        $this->login->logout();
+        return redirect($response, '/login');
+    }
 }

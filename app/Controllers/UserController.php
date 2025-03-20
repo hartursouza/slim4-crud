@@ -22,6 +22,10 @@ class UserController extends Controller
 
     public function index(Request $request, Response $response): Response
     {   
+        if(!$_SESSION['is_logged_in']){
+            return redirect($response, '/login');
+        }
+
         $users = $this->user->findAll();
         $messages = Flash::getAll();
 
@@ -33,6 +37,10 @@ class UserController extends Controller
     
     public function create(Request $request, Response $response)
     {
+        if(!$_SESSION['is_logged_in']){
+            return redirect($response, '/login');
+        }
+
         $messages = Flash::getAll();
 
         $view = $this->getTemplate('create', ['messages' => $messages]);
@@ -42,7 +50,7 @@ class UserController extends Controller
     }
 
     public function store(Request $request, Response $response)
-    {
+    {   
         $name = strip_tags($_POST['name']);
         $email = strip_tags($_POST['email']);
         $password = strip_tags($_POST['password']);
@@ -68,6 +76,10 @@ class UserController extends Controller
 
     public function edit(Request $request, Response $response, array $args)
     {
+        if(!$_SESSION['is_logged_in']){
+            return redirect($response, '/login');
+        }
+
         $user = $this->user->findBy('id', strip_tags($args['id']));
 
         if(!$user)

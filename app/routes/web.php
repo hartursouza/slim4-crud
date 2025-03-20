@@ -7,6 +7,7 @@ use App\Controllers\UserController;
 $app->get('/', [HomeController::class, 'index']);
 $app->get('/login', [LoginController::class, 'index']);
 $app->post('/login', [LoginController::class, 'store']);
+$app->get('/loggout', [LoginController::class, 'loggout']); 
 
 $app->group('/users', function ($group) {
     $group->get('', [UserController::class, 'index']);
