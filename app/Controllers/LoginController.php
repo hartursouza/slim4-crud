@@ -54,7 +54,7 @@ class LoginController extends Controller {
         return redirect($response, '/login');
     }
 
-    public function loggout(Request $request, Response $response)
+    public function logout(Request $request, Response $response)
     {
         $this->login->logout();
         return redirect($response, '/login');

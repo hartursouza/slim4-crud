@@ -11,7 +11,7 @@ use Slim\Middleware\MethodOverrideMiddleware;
 
 $app = AppFactory::create();
 
-require '../app/routes/web.php';
+require '../app/routes/web.php';ma
 
 $methodOverridingMiddleware = new MethodOverrideMiddleware();
 $app->add($methodOverridingMiddleware);
