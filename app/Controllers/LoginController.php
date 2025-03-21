@@ -24,6 +24,12 @@ class LoginController extends Controller {
     { 
         $messages = Flash::getAll();
 
+        // if logged in, redirect to the home page
+        if($_SESSION['is_logged_in']){
+            return redirect($response, '/');
+        }
+
+        // return view login
         $view = $this->getTemplate('login', ['messages' => $messages]);
         $response->getBody()->write($view);
         

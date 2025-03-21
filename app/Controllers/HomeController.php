@@ -13,10 +13,6 @@ class HomeController extends Controller
 
     public function index(Request $request, Response $response, array $args = []): Response
     {   
-        if(!$_SESSION['is_logged_in']) {
-            return redirect($response, '/login');
-        }
-
         $name = $_SESSION['user_logged_data']['name'] ?? '';
         $email = $_SESSION['user_logged_data']['email'] ?? '';
 
