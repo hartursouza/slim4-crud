@@ -3,10 +3,9 @@
 use App\Controllers\LoginController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
+use App\Middlewares\AuthMiddleware;
 
-require('../app/middlewares/AuthMiddleware.php');
-
-$app->get('/', [HomeController::class, 'index'])->add($authMiddleware);
+$app->get('/', [HomeController::class, 'index'])->add(new AuthMiddleware());
 $app->get('/login', [LoginController::class, 'index']);
 $app->post('/login', [LoginController::class, 'store']);
 $app->get('/loggout', [LoginController::class, 'loggout']);
@@ -18,5 +17,5 @@ $app->group('/users', function ($group) {
     $group->get('/update/{id}', [UserController::class, 'edit']);
     $group->put('/update', [UserController::class, 'update']);
     $group->delete('/delete/{id}', [UserController::class, 'destroy']);
-})->add($authMiddleware);
+})->add(new AuthMiddleware());
 
