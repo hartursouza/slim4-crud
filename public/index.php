@@ -2,7 +2,7 @@
 
 session_start();
 
-/* ini_set('display_errors', 1); */
+ini_set('display_errors', 1);
 
 require '../vendor/autoload.php';
 
@@ -12,6 +12,7 @@ use Slim\Middleware\MethodOverrideMiddleware;
 $app = AppFactory::create();
 
 require '../app/routes/web.php';
+require '../app/routes/api.php';
 
 $methodOverridingMiddleware = new MethodOverrideMiddleware();
 $app->add($methodOverridingMiddleware);
